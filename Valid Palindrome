@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        
+        int l=0,r=s.size()-1;
+        while(l<r){
+            if(!check(tolower(s[l]))) {
+                cout<<"l++"<<"\n";
+                l++;
+            }
+            else if(!check(tolower(s[r]))) {cout<<"r--"<<"\n";
+                r--;
+            }
+            else if(tolower(s[l]) == tolower(s[r])){cout<<"l++ r--"<<"\n";
+                l++;
+                r--;
+            }
+            else return false;
+        }
+        return true;
+    }
+    bool check(char c){
+        if(c>='a' && c<='z') return true;
+        if(c>='0' && c<='9') return true;
+        return false;
+    }
+};
