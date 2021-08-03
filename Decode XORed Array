@@ -1,0 +1,13 @@
+class Solution {
+public:
+    vector<int> decode(vector<int>& encoded, int first) {
+        vector<int> ans;
+        ans.push_back(first);
+        int temp=first;
+        for(int i:encoded) {
+            temp^=i;
+            ans.push_back(temp);
+        }
+        return ans;
+    }
+};
