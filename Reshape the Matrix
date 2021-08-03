@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c) {
+        if(r*c == mat[0].size()*mat.size() ) {
+        vector<vector<int> > res;
+        vector<int> temp;
+        for(int k=0;k<mat.size();k++){
+            for(int l=0;l<mat[0].size();l++) {
+               temp.push_back(mat[k][l]);
+             }
+        }
+        int ind=0;
+        for(int i=0;i<r;i++) {
+            cout<<"i "<<i;
+            vector<int> temp1;
+            for(int j=0;j<c;j++) {
+                cout<<" j "<<j;
+                temp1.push_back(temp[ind]);
+                ind++;
+            }
+            res.push_back(temp1);
+        }
+        return res;
+        }
+        return mat;
+    }
+};
