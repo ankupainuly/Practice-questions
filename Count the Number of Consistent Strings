@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int countConsistentStrings(string allowed, vector<string>& words) {
+        unordered_set<char> set(allowed.begin(),allowed.end());
+        int count=0;
+        for(auto i: words) {
+            bool flag=true;
+            for(auto j: i) {
+                if(set.find(j) == set.end()) flag=false;
+            }
+            if(flag) count++;
+        }
+        return count;
+    }
+};
