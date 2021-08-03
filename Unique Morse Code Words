@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int uniqueMorseRepresentations(vector<string>& words) {
+         
+            string c;
+        string code[]={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        vector<string> codeWord;
+        for(auto i:words){
+            c="";
+            for(auto j:i){
+                c+=code[j-'a'];
+            }
+            bool flag=false;
+            for(int i=0;i<codeWord.size();i++){
+                if(codeWord[i] == c) flag=true;
+                
+            }
+            if(flag==false)
+            codeWord.push_back(c);
+        }
+        return codeWord.size();
+    }
+};
