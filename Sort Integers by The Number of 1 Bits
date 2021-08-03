@@ -1,0 +1,41 @@
+class Solution {
+public:
+    static bool comp(pair<int,int>& a,pair<int,int>& b){
+        return a.second<b.second;
+    }
+    
+    vector<int> sortByBits(vector<int>& arr) {
+        vector<pair<int,int> > v;
+        for(auto i: arr) {
+            v.push_back(make_pair(i,HW(i)));
+        }
+        sort(v.begin(),v.end(),comp);
+        int s=0,e=0;
+        bool flag=false;
+        for(int i=0;i<v.size()-1;i++){
+            if(v[i].second == v[i+1].second) {
+                e=i+1;
+            }
+            else{
+                sort(v.begin()+s,v.begin()+e+1);
+                s=i+1;
+                e=i+1;
+            }
+            if(e == v.size()-1) sort(v.begin()+s,v.begin()+e+1);
+            
+        }
+        vector<int> ans;
+        for(auto i:v){
+            ans.push_back(i.first);
+        }
+        return ans;
+    }
+    
+    
+    int HW(int n) {
+        int count=0;
+        if(n == 0) return 0;  
+        else if(n&1) count++;
+        return count+HW(n>>1);
+    }
+};
