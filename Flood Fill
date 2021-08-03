@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        int r=image.size(),c=image[0].size();
+        vector<vector<int>> v(r,vector<int> (c,0));
+        run(image,sr,sc,newColor,v);
+        return image;
+    }
+    
+    void run(vector<vector<int>>& image, int sr, int sc, int newColor,vector<vector<int>> v) {
+        int r=image.size(),c=image[0].size();
+        if(sr<r && sr>=0 && sc<c && sr>=0){
+            if(sc+1<c && image[sr][sc+1] == image[sr][sc] && v[sr][sc+1]==0){
+                v[sr][sc]=1;
+                run(image,sr,sc+1,newColor,v);
+            }
+            if(sc-1>=0 && image[sr][sc-1] == image[sr][sc] && v[sr][sc-1]==0){
+                v[sr][sc]=1;
+                run(image,sr,sc-1,newColor,v);
+            }
+            if(sr+1<r && image[sr+1][sc] == image[sr][sc] && v[sr+1][sc]==0){
+                v[sr][sc]=1;
+                run(image,sr+1,sc,newColor,v);
+            }
+            if(sr-1>=0 && image[sr-1][sc] == image[sr][sc] && v[sr-1][sc]==0){
+                v[sr][sc]=1;
+                run(image,sr-1,sc,newColor,v);
+            }
+            image[sr][sc]=newColor;
+            return;
+        }   
+    }
+};
