@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        unordered_map<int,int> map;
+        unordered_map<int,int>::iterator itr;
+        vector<int> a;
+        if(nums1.size() > nums2.size()){
+            for(int i=0;i<nums2.size();i++){
+                map.insert({nums2[i],1});
+            }
+            for(int i=0;i<nums1.size();i++){
+                itr=map.find(nums1[i]);
+                if(itr != map.end())
+                itr->second=2;
+            }
+            for(itr = map.begin();itr !=map.end();itr++){
+                if(itr->second>=2) a.push_back(itr->first);
+            }
+        }
+        else{
+            for(int i=0;i<nums1.size();i++){
+                map.insert({nums1[i],1});
+            }
+            for(int i=0;i<nums2.size();i++){
+                itr=map.find(nums2[i]);
+                if(itr != map.end())
+                itr->second=2;
+            }
+            for(itr = map.begin();itr !=map.end();itr++){
+                if(itr->second>=2) a.push_back(itr->first);
+            }
+        }
+        
+        return a;
+    }
+    
+};
