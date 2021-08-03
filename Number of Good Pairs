@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        unordered_map<int,int> map;
+        for(int i:nums) {
+            if(map.find(i) != map.end() && map[i] > 0){
+                map[i]++;
+            }
+            else {
+                map[i]=1;
+            }
+        }
+        int count=0;
+        for(pair<int,int> i:map) {
+            cout<<i.first<<" "<<i.second<<"\n";
+            if(i.second >= 2) {
+                count+=i.second*(i.second-1)/2;
+            }
+        }
+        return count;
+    }
+};
