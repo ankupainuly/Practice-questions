@@ -1,0 +1,67 @@
+class NumArray {
+private:
+    int n;
+    //int tree_size;
+    vector<int> tree;
+    
+    void buildTree(vector<int> &arr, int sl, int sr, int node){
+        if (sl==sr){
+            tree[node]  = arr[sl];
+            return;
+        }
+        int mid = sl+(sr-sl)/2;
+        buildTree(arr,sl,mid,node*2+1);
+        buildTree(arr,mid+1,sr, node*2+2);
+        tree[node] = tree[2*node+1]+tree[2*node+2];
+    }
+
+    void updateTree(int node, int sl, int sr, int i, int val){
+        if (sl==sr){
+            tree[node] = val;
+            return;
+        }
+        int mid = sl+(sr-sl)/2;
+        if (i>mid) updateTree(2*node+2,mid+1,sr,i,val);
+        else updateTree(2*node+1,sl,mid,i,val);
+        tree[node] = tree[node*2+1]+tree[node*2+2];
+        
+    }
+    
+    
+    int sumRange(int node, int sl, int sr, int cl, int cr){
+        if (cl<sl || cr>sr)
+            return 0;
+        if (cl==sl && sr==cr) 
+            return tree[node];
+        int mid = sl+(sr-sl)/2;
+        if (cr<=mid)
+            return sumRange(node*2+1,sl,mid,cl,cr);
+        if (cl>mid)
+            return sumRange(node*2+2, mid+1, sr, cl, cr);
+        return sumRange(node*2+1,sl,mid,cl,mid)+sumRange(node*2+2,mid+1,sr,mid+1,cr);
+    }
+    
+
+public:
+    NumArray(vector<int>& nums) {
+        n = nums.size();
+        if (n==0) return;
+        tree = vector<int> (n*4,0);
+        buildTree(nums,0,n-1,0);
+    }
+    
+    void update(int i, int val) {
+         updateTree(0,0,n-1,i,val);
+    }
+    
+    int sumRange(int i, int j) {
+        return sumRange(0,0,n-1,i,j);
+    }
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * obj->update(index,val);
+ * int param_2 = obj->sumRange(left,right);
+ */
