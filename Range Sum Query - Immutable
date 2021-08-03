@@ -1,0 +1,19 @@
+class NumArray {
+public:
+    vector<int> ar;
+    NumArray(vector<int>& nums) {
+        ar=nums;
+    }
+    
+    int sumRange(int left, int right) {
+        int sum=0;
+        //cout<<"left: "<<left<<" right: "<<right<<" sum: "<<accumulate(ar.begin() + left,ar.begin() + right+1,sum)<<"\n";
+        return accumulate(ar.begin() + left,ar.begin() + right+1,sum);
+    }
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * int param_1 = obj->sumRange(left,right);
+ */
