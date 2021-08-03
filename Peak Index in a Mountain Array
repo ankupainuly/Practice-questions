@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int peakIndexInMountainArray(vector<int>& arr) {
+        int i=0,e=arr.size();
+        int sum1=arr[0],sum2=0;
+        while(arr[i+1]>arr[i]){
+            i++;
+        }
+        int ans=i;
+        i++;
+        while(i+1<e && arr[i+1]<arr[i]){
+            i++;
+        }
+        if(i==e-1) return ans;
+        else return 1;
+    }
+};
