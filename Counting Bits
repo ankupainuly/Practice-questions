@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans;
+        for(int i=0;i<=n;i++){
+            ans.push_back(hammingWt(i));
+        }
+        return ans;
+    }
+    
+    int hammingWt(int n){
+        int num=0;
+        while(n){
+            if(n&1) num++;
+            n=n>>1;
+        }
+        return num;
+    }
+};
