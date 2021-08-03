@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> shortestToChar(string s, char c) {
+        vector<int> ePos;
+        vector<int> res;
+        for(int i=0;i<s.size();i++) {
+            if(s[i] == c) ePos.push_back(i);
+        }
+        for(int i=0;i<s.size();i++) {
+            int min=INT_MAX;
+            for(int j:ePos){
+                if(abs(i-j)<min)
+                min=abs(i-j);
+            }
+            res.push_back(min);
+        }
+        return res;
+    }
+};
