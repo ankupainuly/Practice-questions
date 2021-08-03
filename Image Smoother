@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+        int n = img.size();
+        int a[]={-1,0,1};
+        vector<vector<int> > v ;
+        v=img;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<img[0].size();j++)
+            {
+                int sum=0;
+                int count=0;
+                for(int k:a)
+                {
+                    for(int m:a)
+                    {
+                        if((i+k<img.size() && i+k>=0) && (j+m<img[0].size() && j+m>=0))
+                        {
+                            sum += img[i+k][j+m];
+                            count++;
+                        }
+                    }
+                }
+                v[i][j]=sum/count;
+            }
+            
+        }
+            
+            
+        
+        return v;
+    }
+};
